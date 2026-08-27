@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DexFans — The Creator Platform</title>
+  <meta name="description" content="DexFans is the creator-first platform for connecting with fans, sharing exclusive content and building your own community.">
+
+  <meta property="og:title" content="DexFans — The Creator Platform">
+  <meta property="og:description" content="Your content. Your fans. Your future.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root {
+      --bg: #07050b;
+      --bg-soft: #0e0a14;
+      --card: #120d1a;
+      --purple: #8b3dff;
+      --purple-light: #b46cff;
+      --pink: #ff3fa4;
+      --text: #ffffff;
+      --muted: #aaa2b5;
+      --border: rgba(255,255,255,.09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAV */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 6%;
+      background: rgba(7,5,11,.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      color: #c9c3cf;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,.07);
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: linear-gradient(100deg, var(--purple), var(--pink));
+      color: white;
+      box-shadow: 0 10px 35px rgba(139,61,255,.28);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 150px 6% 90px;
+      overflow: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(139,61,255,.30), transparent 68%);
+      top: 5%;
+      left: 25%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 58%;
+      max-width: 800px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
+      border-radius: 999px;
+      color: #d9c7ff;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(55px, 8vw, 105px);
+      line-height: .92;
+      letter-spacing: -5px;
+      margin-bottom: 28px;
+    }
+
+    h1 span {
+      background: linear-gradient(100deg, #fff, #b879ff, #ff4eaf);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 610px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.65;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      position: absolute;
+      right: 3%;
+      top: 14%;
+      width: 42%;
+      height: 72%;
+      border-radius: 35px;
+      overflow: hidden;
+      transform: rotate(3deg);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 40px 100px rgba(0,0,0,.6);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(7,5,11,.85));
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      margin: 0 6%;
+      border: 1px solid var(--border);
+      background: var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .stat {
+      background: var(--card);
+      padding: 35px;
+      text-align: center;
+    }
+
+    .stat strong {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 120px 6%;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 55px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(38px,5vw,65px);
+      letter-spacing: -3px;
+      margin-bottom: 18px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    /* FEATURES */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      min-height: 300px;
+      padding: 35px;
+      background:
+        radial-gradient(circle at top right, rgba(139,61,255,.18), transparent 45%),
+        var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      transition: .3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-7px);
+      border-color: rgba(180,108,255,.35);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg,var(--purple),var(--pink));
+      font-size: 23px;
+      margin-bottom: 60px;
+    }
+
+    .feature h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* CREATOR GRID */
+
+    .creator-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 15px;
+    }
+
+    .creator {
+      height: 430px;
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .creator img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .5s ease;
+    }
+
+    .creator:hover img {
+      transform: scale(1.07);
+    }
+
+    .creator-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 25px;
+      background: linear-gradient(transparent,rgba(0,0,0,.9));
+    }
+
+    .creator-info h3 {
+      margin-bottom: 5px;
+    }
+
+    .creator-info span {
+      color: #c6bdca;
+      font-size: 13px;
+    }
+
+    /* CTA */
+
+    .cta {
+      margin: 0 6% 100px;
+      padding: 90px 50px;
+      border-radius: 35px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(139,61,255,.45), transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(255,63,164,.3), transparent 40%),
+        #10091a;
+      border: 1px solid var(--border);
+    }
+
+    .cta h2 {
+      font-size: clamp(40px,6vw,75px);
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 580px;
+      margin: auto auto 30px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 50px 6%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      color: #8e8795;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 130px;
+        display: block;
+      }
+
+      .hero-content {
+        width: 100%;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .hero-image {
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 100%;
+        height: 450px;
+        margin-top: 60px;
+        transform: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .creator-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .creator {
+        height: 330px;
+      }
+
+      section {
+        padding: 80px 6%;
+      }
+
+      .cta {
+        margin: 0 6% 70px;
+        padding: 65px 25px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      nav {
+        padding: 18px 5%;
+      }
+
+      .nav-buttons .btn-dark {
+        display: none;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      h1 {
+        font-size: 56px;
+      }
+
+      .hero-image {
+        height: 380px;
+      }
+
+      .creator-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .creator {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="#" class="logo">Dex<span>Fans</span></a>
+
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#creators">Creators</a>
+      <a href="#why">Why DexFans</a>
+    </div>
+
+    <div class="nav-buttons">
+      <a href="#" class="btn btn-dark">Log in</a>
+      <a href="#join" class="btn btn-primary">Join DexFans</a>
+    </div>
+  </nav>
+
+
+  <main>
+
+    <section class="hero">
+
+      <div class="glow"></div>
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          ✦ Built for creators. Designed for freedom.
+        </div>
+
+        <h1>
+          Your fans.<br>
+          <span>Your world.</span>
+        </h1>
+
+        <p>
+          Build your community, share what you create and turn your audience
+          into a business — with a platform designed around creators.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#join" class="btn btn-primary">
+            Become a Creator →
+          </a>
+
+          <a href="#creators" class="btn btn-dark">
+            Explore Creators
+          </a>
+        </div>
+
+      </div>
+
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85"
+          alt="Creator">
+      </div>
+
+    </section>
+
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong>Global</strong>
+        <span>Creator community</span>
+      </div>
+
+      <div class="stat">
+        <strong>24/7</strong>
+        <span>Fan connection</span>
+      </div>
+
+      <div class="stat">
+        <strong>100%</strong>
+        <span>Creator focused</span>
+      </div>
+
+    </div>
+
+
+    <section id="why">
+
+      <div class="section-heading">
+        <h2>Built around you.</h2>
+
+        <p>
+          DexFans gives creators the tools to build relationships,
+          monetize their audience and take control of their digital business.
+        </p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">✦</div>
+          <h3>Own your audience</h3>
+          <p>
+            Build a direct relationship with your fans instead of relying
+            entirely on algorithms and third-party platforms.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Monetize your way</h3>
+          <p>
+            Subscriptions, exclusive content, direct fan interactions
+            and more ways to turn attention into revenue.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">◈</div>
+          <h3>Built for the future</h3>
+          <p>
+            DexFans combines creator tools with next-generation
+            decentralized technology.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section id="features">
+
+      <div class="section-heading">
+        <h2>Everything creators need.</h2>
+
+        <p>
+          A modern toolkit for building your audience and growing
+          your creator business.
+        </p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">♡</div>
+          <h3>Subscriptions</h3>
+          <p>
+            Build recurring income with exclusive access for your biggest fans.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">◆</div>
+          <h3>Exclusive content</h3>
+          <p>
+            Publish premium posts and experiences directly to your audience.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">◎</div>
+          <h3>Direct connection</h3>
+          <p>
+            Talk to your fans and build relationships beyond the feed.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section id="creators">
+
+      <div class="section-heading">
+        <h2>Meet the creators.</h2>
+
+        <p>
+          A global community creating on their own terms.
+        </p>
+      </div>
+
+      <div class="creator-grid">
+
+        <div class="creator">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85" alt="Creator">
+          <div class="creator-info">
+            <h3>Creator One</h3>
+            <span>@creatorone</span>
+          </div>
+        </div>
+
+        <div class="creator">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85" alt="Creator">
+          <div class="creator-info">
+            <h3>Creator Two</h3>
+            <span>@creatortwo</span>
+          </div>
+        </div>
+
+        <div class="creator">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=85" alt="Creator">
+          <div class="creator-info">
+            <h3>Creator Three</h3>
+            <span>@creatorthree</span>
+          </div>
+        </div>
+
+        <div class="creator">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=85" alt="Creator">
+          <div class="creator-info">
+            <h3>Creator Four</h3>
+            <span>@creatorfour</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section id="join">
+
+      <div class="cta">
+
+        <h2>Your audience is waiting.</h2>
+
+        <p>
+          Create your page, bring your community together and start
+          building your creator business on DexFans.
+        </p>
+
+        <a href="#" class="btn btn-primary">
+          Become a Creator →
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div>
+      <strong>DexFans</strong> — Built for creators.
+    </div>
+
+    <div>
+      © 2026 DexFans
+    </div>
+
+  </footer>
+
+
+  <script>
+    // Simple reveal animation
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".feature, .creator, .stat").forEach(el => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(20px)";
+      el.style.transition = "opacity .6s ease, transform .6s ease";
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
